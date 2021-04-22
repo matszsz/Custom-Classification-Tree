@@ -1,0 +1,50 @@
+---
+title: "Custom Classification Tree Experiments"
+author: "Mateusz Szysz"
+date: "22 04 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+source('Classification Tree.R')
+data <- read_xlsx('GDP_data.xlsx', sheet = 'GDP_per_capita_2017')
+```
+
+# First example
+```{r}
+tree1 <- build_tree(data, 
+           DEP = "gdp_per_capita", 
+           COLS = c('pop', 'xr', 'delta'),
+           minimum = 0.05,
+           max_depth = 5)
+plot_tree(tree1)
+```
+
+# Decreasing maximal depth of the tree
+```{r}
+tree2 <- build_tree(data, 
+           DEP = "gdp_per_capita", 
+           COLS = c('pop', 'xr', 'delta'),
+           minimum = 0.05,
+           max_depth = 3)
+plot_tree(tree2)
+```
+
+# Increasing minimal number of observations in each node
+```{r}
+tree3 <- build_tree(data, 
+           DEP = "gdp_per_capita", 
+           COLS = c('pop', 'xr', 'delta'),
+           minimum = 0.25,
+           max_depth = 3)
+plot_tree(tree3)
+```
+
+# Model with cost function and no other contraints
+```{r}
+tree4 <- build_tree(data, 
+           DEP = "gdp_per_capita", 
+           COLS = c('pop', 'xr', 'delta'),
+           alpha = 10000000000)
+plot_tree(tree4)
+```
