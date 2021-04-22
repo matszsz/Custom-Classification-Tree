@@ -1,2 +1,2 @@
-# Custom-Classification-Tree
-Custom implementation of classification tree in R
+# Custom Classification Tree
+Custom implementation of classification tree in R with basic experiments.
